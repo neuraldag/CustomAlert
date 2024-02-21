@@ -114,26 +114,26 @@ class AlertView: UIView, AlertViewModel {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
-    convenience init(title: String, message: String, okButtonText: String, cancelButtonText: String) {
+    convenience init(title: String, message: String, rightButtonText: String, leftButtonText: String) {
         self.init(frame: UIScreen.main.bounds)
-        setupUIView(title: title, message: message, okButtonText: okButtonText, cancelButtonText: cancelButtonText)
+        setupUIView(title: title, message: message, rightButtonText: rightButtonText, leftButtonText: leftButtonText)
     }
-    convenience init(title: String, message: String, okButtonText: String, cancelButtonText: String, target: AlertViewDelegate) {
+    convenience init(title: String, message: String, rightButtonText: String, leftButtonText: String, target: AlertViewDelegate) {
         self.init(frame: UIScreen.main.bounds)
         self.delegate = target
-        setupUIView(title: title, message: message, okButtonText: okButtonText, cancelButtonText: cancelButtonText)
+        setupUIView(title: title, message: message, rightButtonText: rightButtonText, leftButtonText: leftButtonText)
     }
-    convenience init(title: String, message: String, okButtonText: String, cancelButtonText: String, actionCompletionHandler: @escaping (String, ButtonType) -> Void) {
+    convenience init(title: String, message: String, rightButtonText: String, leftButtonText: String, actionCompletionHandler: @escaping (String, ButtonType) -> Void) {
         self.init(frame: UIScreen.main.bounds)
         self.completionHandler = actionCompletionHandler
-        setupUIView(title: title, message: message, okButtonText: okButtonText, cancelButtonText: cancelButtonText)
+        setupUIView(title: title, message: message, rightButtonText: rightButtonText, leftButtonText: leftButtonText)
     }
     
     
     //MARK: -UI Setup
-    private func setupUIView(title: String, message: String, okButtonText: String, cancelButtonText: String) {
-        rightButtonTitle = okButtonText
-        leftButtonTitle = cancelButtonText
+    private func setupUIView(title: String, message: String, rightButtonText: String, leftButtonText: String) {
+        rightButtonTitle = rightButtonText
+        leftButtonTitle = leftButtonText
         setupBackgroundView()
         setupContainerView()
         setupTitleLabel()
@@ -143,8 +143,8 @@ class AlertView: UIView, AlertViewModel {
         setupButtons()
         messageLabel.text = message
         titleLabel.text = title
-        leftButton.setTitle(cancelButtonText, for: .normal)
-        rightButton.setTitle(okButtonText, for: .normal)
+        leftButton.setTitle(leftButtonText, for: .normal)
+        rightButton.setTitle(rightButtonText, for: .normal)
     }
     
     private func setupBackgroundView() {
@@ -225,7 +225,7 @@ class AlertView: UIView, AlertViewModel {
     }
     
     
-    private func setupOkButtonWithRespectToSuperview() {
+    private func setupRightButtonWithRespectToSuperview() {
         containerView.addSubview(rightButton)
         rightButton.snp.makeConstraints { make in
             make.top.equalTo(separatorLabelHorizontal)
@@ -245,7 +245,7 @@ class AlertView: UIView, AlertViewModel {
             setupRightButton()
             separatorLabelVertical.isHidden = false
         } else {
-            setupOkButtonWithRespectToSuperview()
+            setupRightButtonWithRespectToSuperview()
             separatorLabelVertical.isHidden = true
         }
     }

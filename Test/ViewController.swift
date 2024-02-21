@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     
     @objc func showAlert(_ sender: Any) {
         print("tapped")
-        let alertView = AlertView(title: "Удалить папку «Непрочитанные»?", message: "Это не затронет чаты, которые в ней находятся", okButtonText: "Удалить", cancelButtonText: "Отменить") { (_, button) in
+        let alertView = AlertView(title: "Удалить папку «Непрочитанные»?", message: "Это не затронет чаты, которые в ней находятся", rightButtonText: "Удалить", leftButtonText: "Отменить") { (_, button) in
             if button == .other { }
         }
         alertView.show(animated: true)
